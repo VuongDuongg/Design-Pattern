@@ -1,12 +1,13 @@
 public class BaiTap {
     public static void main(String[] args) {
-        NotificationService emailService = new EmailService();
-        emailService.Notify();
+
+        NotificationService ns = new EmailService();
+        ns.Notify();
         NotificationService smsService = new SMSService();
         smsService.Notify();
         NotificationService pushService = new PushService();
         pushService.Notify();
-        
+
     }
 }
 
