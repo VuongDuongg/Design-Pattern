@@ -81,3 +81,6 @@ class RailService extends LogisticsService {
         return new Train();
     }
 }
+
+// Thong bao Email. SMS, Push
+
