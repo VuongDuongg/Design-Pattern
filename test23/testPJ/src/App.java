@@ -13,33 +13,33 @@ public class App {
 }
 
 interface Transport {
-    void deliver();
+    void Deliver();
 }
 
 class Truck implements Transport {
     @Override
-    public void deliver() {
+    public void Deliver() {
         System.out.println("The truck is delivering cargo.");
     }
 }
 
 class Ship implements Transport {
     @Override
-    public void deliver() {
+    public void Deliver() {
         System.out.println("The ship is delivering cargo.");
     }
 }
 
 class Airplane implements Transport {
     @Override
-    public void deliver() {
+    public void Deliver() {
         System.out.println("The airplane is delivering cargo.");
     }
 }
 
 class Train implements Transport {
     @Override
-    public void deliver() {
+    public void Deliver() {
         System.out.println("The train is delivering cargo.");
     }
 }
@@ -50,7 +50,7 @@ abstract class LogisticsService {
 
     public void planDelivery() {
         tp = createTransport();
-        tp.deliver();
+        tp.Deliver();
     }
 }
 
