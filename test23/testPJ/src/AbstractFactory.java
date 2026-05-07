@@ -1,7 +1,7 @@
 class Client {
-    private Chair chair;
-    private Sofa sofa;
-    private Table table;
+    private final Chair chair;
+    private final Sofa sofa;
+    private final Table table;
 
     public Client(FurnitureFactory factory) {
         chair = factory.createChair();
@@ -33,7 +33,7 @@ public class AbstractFactory {
         client2.useFurniture();
     }
 }
-
+ 
 interface Chair {
     void sitOn();
     void hasLegs();

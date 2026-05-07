@@ -1,6 +1,5 @@
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
         LogisticsService ls = new RoadService();
         ls.planDelivery();
         ls = new SeaService();
