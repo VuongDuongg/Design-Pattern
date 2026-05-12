@@ -14,7 +14,7 @@ public class Shape {
 }
 
 class RoundHole {
-    private double radius;
+    private final double radius;
 
     public RoundHole(double radius) {
         this.radius = radius;
@@ -30,7 +30,7 @@ class RoundHole {
 }
 
 class RoundPeg {
-    private double radius;
+    private final double radius;
 
     public RoundPeg(double radius) {
         this.radius = radius;
@@ -42,7 +42,7 @@ class RoundPeg {
 }
 
 class SquarePeg {
-    private double width;
+    private final double width;
 
     public SquarePeg(double width) {
         this.width = width;
@@ -54,10 +54,8 @@ class SquarePeg {
 }
 
 class SquarePegAdapter extends RoundPeg {
-    private SquarePeg peg;
 
     public SquarePegAdapter(SquarePeg peg) {
         super(peg.getWidth() * Math.sqrt(2) / 2);
-        this.peg = peg;
     }
 }
