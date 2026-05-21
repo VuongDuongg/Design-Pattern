@@ -20,13 +20,14 @@ public class DecoratorExample {
     // ==========================================
 
     interface IPaymentGateway {
-        void processPayment(double amount);
+        boolean processPayment(double amount);
     }
 
     class BankPaymentGateway implements IPaymentGateway {
         @Override
-        public void processPayment(double amount) {
+        public boolean processPayment(double amount) {
             System.out.println("   -> [Core Bank] Đang trừ tiền tài khoản: $" + amount);
+            return true;
         }
     }
 
@@ -35,8 +36,8 @@ public class DecoratorExample {
         public BankPaymentGatewayDecorator(IPaymentGateway gateway) { this.wrappedGateway = gateway; }
 
         @Override
-        public void processPayment(double amount) {
-            wrappedGateway.processPayment(amount);
+        public boolean processPayment(double amount) {
+            return wrappedGateway.processPayment(amount);
         }
     }
 
@@ -44,13 +45,13 @@ public class DecoratorExample {
         public ValidationDecorator(IPaymentGateway gateway) { super(gateway); }
 
         @Override
-        public void processPayment(double amount) {
+        public boolean processPayment(double amount) {
             if (amount <= 0) {
                 System.out.println("> [Valid] Thất bại: Số tiền không hợp lệ!");
-                return;
+                return false;
             }
             System.out.println("> [Valid] Thành công: Số tiền hợp lệ.");
-            super.processPayment(amount);
+            return super.processPayment(amount);
         }
     }
 
@@ -58,10 +59,11 @@ public class DecoratorExample {
             public LoggingDecorator(IPaymentGateway gateway) { super(gateway); }
             
             @Override
-            public void processPayment(double amount) {
+            public boolean processPayment(double amount) {
                 System.out.println("> [Log] Bắt đầu giao dịch...");
-                super.processPayment(amount);
+                boolean result = super.processPayment(amount);
                 System.out.println("> [Log] Kết thúc giao dịch.");
+                return result;
             }
         }
 
@@ -69,45 +71,10 @@ public class DecoratorExample {
             public InvoiceDecorator(IPaymentGateway gateway) { super(gateway); }
 
             @Override
-            public void processPayment(double amount) {
-                super.processPayment(amount);
+            public boolean processPayment(double amount) {
+                boolean result = super.processPayment(amount);
                 System.out.println("> [Invoice] Đã xuất hóa đơn cho khách hàng.");
+                return result;
             }
         }
-    // class LoggingDecorator implements IPaymentGateway {
-    //     private IPaymentGateway wrappedGateway;
-    //     public LoggingDecorator(IPaymentGateway gateway) { this.wrappedGateway = gateway; }
-
-    //     @Override
-    //     public void processPayment(double amount) {
-    //         System.out.println("> [Log] Bắt đầu giao dịch...");
-    //         wrappedGateway.processPayment(amount);
-    //         System.out.println("> [Log] Kết thúc giao dịch.");
-    //     }
-    // }
-
-    // class ValidationPaymentGateway implements IPaymentGateway {
-    //     private IPaymentGateway wrappedGateway;
-    //     public ValidationPaymentGateway(IPaymentGateway gateway) { this.wrappedGateway = gateway; }
-
-    //     @Override
-    //     public void processPayment(double amount) {
-    //         if (amount <= 0) {
-    //             System.out.println("> [Valid] Thất bại: Số tiền không hợp lệ!");
-    //             return;
-    //         }
-    //         System.out.println("> [Valid] Thành công: Số tiền hợp lệ.");
-    //         wrappedGateway.processPayment(amount);
-    //     }
-    // }
-
-    // class InvoicePaymentGateway implements IPaymentGateway {
-    //     private IPaymentGateway wrappedGateway;
-    //     public InvoicePaymentGateway(IPaymentGateway gateway) { this.wrappedGateway = gateway; }
-
-    //     @Override
-    //     public void processPayment(double amount) {
-    //         wrappedGateway.processPayment(amount);
-    //         System.out.println("> [Invoice] Đã xuất hóa đơn cho khách hàng.");
-    //     }
-    // }
+    
