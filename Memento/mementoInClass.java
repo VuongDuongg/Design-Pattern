@@ -1,134 +1,152 @@
 package Memento;
 
+import java.util.Date;
 import java.util.Stack;
 
 public class mementoInClass {
     public static void main(String[] args) {
-        // Khởi tạo Originator và Caretaker
-        TextEditor editor = new TextEditor("Hello", 0, 0, 100);
+        // Khởi tạo Editor (Originator) và History (Caretaker)
+        Editor editor = new Editor("Phiên bản 1", 10, 20, 100);
         History history = new History();
 
-        // 1. Lưu trạng thái ban đầu và thực hiện thay đổi
-        history.save(editor.createSnapshot());
-        editor.insertText(" World");
-        editor.display(); // Output: Text: Hello World | Cursor: (0,0) | Width: 100
+        // Thay đổi và lưu trạng thái vào History
+        editor.display();
+        history.add(editor.makeSnapshot());
 
-        // 2. Lưu trạng thái thứ hai và thực hiện thay đổi tiếp theo
-        history.save(editor.createSnapshot());
-        editor.deleteText(6); // Xóa chữ " World"
-        editor.setCursor(5, 0); // Di chuyển con trỏ
-        editor.display(); // Output: Text: Hello | Cursor: (5,0) | Width: 100
+        editor.setText("Phiên bản 2");
+        editor.setCursorPos(50, 60);
+        editor.display();
+        history.add(editor.makeSnapshot());
 
-        System.out.println("--- Tiến hành Undo ---");
+        editor.setText("Phiên bản chỉnh sửa lỗi");
+        editor.display();
 
-        // 3. Undo lần 1: Khôi phục lại trạng thái "Hello World" ban đầu
-        if (!history.isEmpty()) {
-            editor.restore(history.undo());
+        System.out.println("\n--- Thực hiện hoàn tác (Undo) ---");
+        
+        // Xem metadata lịch sử từ phía Caretaker
+        history.showHistory();
+
+        // Khôi phục về snapshot gần nhất (Phiên bản 2)
+        Memento lastSnapshot = history.pop();
+        if (lastSnapshot != null) {
+            editor.restore(lastSnapshot);
         }
-        editor.display(); // Output: Text: Hello World | Cursor: (0,0) | Width: 100
+        editor.display();
 
-        // 4. Undo lần 2: Khôi phục lại trạng thái "Hello" gốc lúc chưa thêm gì
-        if (!history.isEmpty()) {
-            editor.restore(history.undo());
+        // Khôi phục về snapshot đầu tiên (Phiên bản 1)
+        Memento firstSnapshot = history.pop();
+        if (firstSnapshot != null) {
+            editor.restore(firstSnapshot);
         }
-        editor.display(); // Output: Text: Hello | Cursor: (0,0) | Width: 100
+        editor.display();
     }
 
     // ==========================================
-    // 1. ORIGINATOR: Đối tượng chính cần lưu/khôi phục trạng thái
+    // 1. MEMENTO INTERFACE (Caretaker chỉ nhìn thấy phần này)
     // ==========================================
-    static class TextEditor {
-        private String _text;
-        private int _index_x;
-        private int _index_y;
-        private int _width;
+    interface Memento {
+        String getName();
+        Date getSnapshotDate();
+    }
 
-        public TextEditor(String text, int index_x, int index_y, int width) {
-            this._text = text;
-            this._index_x = index_x;
-            this._index_y = index_y;
-            this._width = width;
+    // ==========================================
+    // 2. ORIGINATOR (Đối tượng chính)
+    // ==========================================
+    static class Editor {
+        private String text;
+        private int cursorPos;
+        private int selection;
+        private int currentFont;
+        private int styles;
+
+        public Editor(String text, int cursorPos, int selection, int styles) {
+            this.text = text;
+            this.cursorPos = cursorPos;
+            this.selection = selection;
+            this.styles = styles;
         }
 
-        public void insertText(String text) {
-            _text += text;
+        // Tạo bản chụp snapshot - trả về kiểu Interface
+        public Memento makeSnapshot() {
+            return new Snapshot(text, cursorPos, selection, currentFont, styles);
         }
 
-        public void deleteText(int length) {
-            if (length <= _text.length()) {
-                _text = _text.substring(0, _text.length() - length);
+        // Khôi phục trạng thái
+        public void restore(Memento memento) {
+            // Kiểm tra và ép kiểu ngược lại về Snapshot cụ thể để lấy full thuộc tính
+            if (memento instanceof Snapshot) {
+                Snapshot snapshot = (Snapshot) memento;
+                this.text = snapshot.text;
+                this.cursorPos = snapshot.cursorPos;
+                this.selection = snapshot.selection;
+                this.currentFont = snapshot.currentFont;
+                this.styles = snapshot.styles;
             }
         }
 
-        public void setCursor(int x, int y) {
-            this._index_x = x;
-            this._index_y = y;
-        }
-
-        // Tạo ra bản sao trạng thái hiện tại (Memento)
-        public TextEditorSnapshot createSnapshot() {
-            return new TextEditorSnapshot(_text, _index_x, _index_y, _width);
-        }
-
-        // Khôi phục lại trạng thái từ bản sao cũ
-        public void restore(TextEditorSnapshot snapshot) {
-            if (snapshot != null) {
-                this._text = snapshot.getText();
-                this._index_x = snapshot.getIndexX();
-                this._index_y = snapshot.getIndexY();
-                this._width = snapshot.getWidth();
-            }
-        }
+        public void setText(String text) { this.text = text; }
+        public void setCursorPos(int x, int y) { this.cursorPos = x + y; }
 
         public void display() {
-            System.out.println("Text: " + _text + " | Cursor: (" + _index_x + "," + _index_y + ") | Width: " + _width);
+            System.out.println("[Editor State] Text: '" + text + "', Cursor: " + cursorPos + ", Styles: " + styles);
+        }
+
+        // ==========================================
+        // 3. CONCRETE MEMENTO (Nested class / Inner class riêng tư của Editor)
+        // ==========================================
+        // Đặt private/protected tĩnh để chỉ Editor có quyền truy cập vào các trường dữ liệu
+        private static class Snapshot implements Memento {
+            private final String text;
+            private final int cursorPos;
+            private final int selection;
+            private final int currentFont;
+            private final int styles;
+            private final Date date;
+
+            public Snapshot(String text, int cursorPos, int selection, int currentFont, int styles) {
+                this.text = text;
+                this.cursorPos = cursorPos;
+                this.selection = selection;
+                this.currentFont = currentFont;
+                this.styles = styles;
+                this.date = new Date(); // Tự động lưu thời gian chụp
+            }
+
+            // Hiện thực các hàm thuộc Memento Interface (Metadata công khai)
+            @Override
+            public String getName() {
+                return "Snapshot: '" + (text.length() > 10 ? text.substring(0, 10) + "..." : text) + "'";
+            }
+
+            @Override
+            public Date getSnapshotDate() {
+                return date;
+            }
         }
     }
 
     // ==========================================
-    // 2. MEMENTO: Đối tượng chứa dữ liệu snapshot (Immutable)
-    // ==========================================
-    static class TextEditorSnapshot {
-        private final String _text;
-        private final int _index_x;
-        private final int _index_y;
-        private final int _width;
-
-        public TextEditorSnapshot(String text, int index_x, int index_y, int width) {
-            this._text = text;
-            this._index_x = index_x;
-            this._index_y = index_y;
-            this._width = width;
-        }
-
-        // Chỉ cung cấp các hàm Getter để đọc dữ liệu khi khôi phục, không cho phép chỉnh sửa dữ liệu snapshot
-        public String getText() { return _text; }
-        public int getIndexX() { return _index_x; }
-        public int getIndexY() { return _index_y; }
-        public int getWidth() { return _width; }
-    }
-    
-    // ==========================================
-    // 3. CARETAKER: Đối tượng quản lý lịch sử các bản sao
+    // 4. CARETAKER (Người quản lý lịch sử)
     // ==========================================
     static class History {
-        private final Stack<TextEditorSnapshot> _snapshots = new Stack<>();
+        // Chỉ lưu danh sách các interface hẹp Memento, không biết cấu trúc bên trong Snapshot
+        private final Stack<Memento> historyStack = new Stack<>();
 
-        // Lưu trữ bản sao vào bộ nhớ lịch sử
-        public void save(TextEditorSnapshot snapshot) {
-            _snapshots.push(snapshot);
+        public void add(Memento memento) {
+            historyStack.push(memento);
         }
 
-        // Lấy bản sao gần nhất ra để chuẩn bị khôi phục (Undo)
-        public TextEditorSnapshot undo() {
-            if (_snapshots.isEmpty()) {
-                return null;
+        public Memento pop() {
+            if (historyStack.isEmpty()) return null;
+            return historyStack.pop();
+        }
+
+        public void showHistory() {
+            System.out.println("Danh sách các bản sao lưu hiện có:");
+            for (Memento m : historyStack) {
+                System.out.println(" - " + m.getName() + " | Tạo lúc: " + m.getSnapshotDate());
             }
-            return _snapshots.pop();
-        }
-
-        public boolean isEmpty() {
-            return _snapshots.isEmpty();
+            System.out.println();
         }
     }
 }
