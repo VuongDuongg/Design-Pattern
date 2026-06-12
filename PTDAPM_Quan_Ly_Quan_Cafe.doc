@@ -1,0 +1,2527 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <title>PTDAPM Quan Ly Quan Cafe</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #000000; text-align: left; padding: 8px; }
+        th { background-color: #f2f2f2; }
+        pre { background-color: #f8f8f8; padding: 10px; border: 1px solid #cccccc; white-space: pre-wrap; }
+        h1, h2, h3 { color: #333333; }
+    </style>
+</head>
+<body>
+<h1>BÀI TẬP LỚN - PHÁT TRIỂN DỰ ÁN PHẦN MỀM</h1>
+<h2>Đề Tài: Hệ Thống Quản Lý Quán Cafe</h2>
+<p><strong>Nhóm thực hiện:</strong> Nhóm X<br />
+<strong>Giảng viên hướng dẫn:</strong> TS. ...<br />
+<strong>Năm:</strong> 2026</p>
+<hr />
+<h1>MỤC LỤC</h1>
+<ul>
+<li><a href="#lời-nói-đầu">LỜI NÓI ĐẦU</a></li>
+<li><a href="#i-phân-tích-yêu-cầu-khách-hàng">I. PHÂN TÍCH YÊU CẦU KHÁCH HÀNG</a></li>
+<li><a href="#ii-lập-kế-hoạch-dự-án">II. LẬP KẾ HOẠCH DỰ ÁN</a></li>
+<li><a href="#iii-phân-tích-và-thiết-kế-hệ-thống">III. PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG</a></li>
+<li><a href="#iv-kiểm-thử">IV. KIỂM THỬ</a></li>
+<li><a href="#v-đóng-gói-và-triển-khai">V. ĐÓNG GÓI VÀ TRIỂN KHAI</a></li>
+<li><a href="#kết-luận">KẾT LUẬN</a></li>
+</ul>
+<hr />
+<h1>LỜI NÓI ĐẦU</h1>
+<p>Trong bối cảnh ngành F&amp;B (Food and Beverage) tại Việt Nam phát triển mạnh mẽ, các quán cafe ngày càng cần một hệ thống quản lý số hóa để nâng cao hiệu quả vận hành, từ việc quản lý thực đơn, xử lý đơn hàng tại quầy (POS), kiểm soát kho nguyên liệu cho đến thanh toán đa kênh. Việc áp dụng phần mềm quản lý không chỉ giúp giảm thiểu sai sót thủ công mà còn tối ưu hóa trải nghiệm khách hàng.</p>
+<p>Xuất phát từ nhu cầu thực tế đó, nhóm chúng em đã tiến hành phân tích, thiết kế và phát triển <strong>Hệ thống Quản lý Quán Cafe</strong> – một giải pháp phần mềm toàn diện áp dụng các <strong>Design Pattern</strong> chuẩn mực trong kỹ thuật phần mềm (Singleton, Factory, Decorator, Command, Composite, Adapter, Prototype) nhằm đảm bảo tính mở rộng, bảo trì và hiệu năng cao.</p>
+<p>Mặc dù đã rất cố gắng, do hạn chế về thời gian và kinh nghiệm, đề tài khó tránh khỏi những thiếu sót nhất định. Nhóm chúng em kính mong nhận được sự góp ý và chỉ dẫn thêm từ thầy/cô để bài làm được hoàn thiện hơn.</p>
+<p>Chúng em xin trân trọng cảm ơn!</p>
+<hr />
+<h1>I. PHÂN TÍCH YÊU CẦU KHÁCH HÀNG</h1>
+<h2>1. Bản kế hoạch quản lý yêu cầu (RMP)</h2>
+<h3>1.1. Giới thiệu</h3>
+<h4>1.1.1. Mục đích</h4>
+<p>Tài liệu Kế hoạch Quản lý Yêu cầu (Requirements Management Plan – RMP) này được xây dựng nhằm xác định các phương pháp, quy trình và công cụ được sử dụng để quản lý các yêu cầu của <strong>Hệ thống Quản lý Quán Cafe (Cafe Management System – CMS)</strong>.</p>
+<p>Tài liệu đóng vai trò là cơ sở để:
+- Định hướng hoạt động thu thập, phân tích, đặc tả và quản lý yêu cầu hệ thống
+- Đảm bảo các yêu cầu được xác định rõ ràng, nhất quán và có khả năng truy xuất nguồn gốc
+- Hỗ trợ kiểm soát và quản lý các thay đổi yêu cầu trong suốt vòng đời phát triển
+- Làm tài liệu tham chiếu cho các giai đoạn thiết kế, phát triển, kiểm thử và nghiệm thu</p>
+<h4>1.1.2. Phạm vi áp dụng</h4>
+<p>Bản RMP này áp dụng cho toàn bộ các yêu cầu của hệ thống CMS được phát triển nhằm phục vụ công tác quản lý vận hành quán cafe, bao gồm: quản lý thực đơn, đặt hàng POS, pha chế, kho nguyên liệu, thanh toán và báo cáo doanh thu.</p>
+<h3>1.2. Công cụ sử dụng và các kiểu yêu cầu</h3>
+<h4>1.2.1. Các công cụ sử dụng quản lý yêu cầu</h4>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Công cụ</th>
+<th>Mục đích sử dụng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Microsoft Word / Markdown</td>
+<td>Soạn thảo và chỉnh sửa các tài liệu quản lý yêu cầu (RMP, SRS)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>StarUML / Draw.io / Mermaid</td>
+<td>Mô hình hóa hệ thống (Use Case, Activity, Sequence, Class Diagram)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Discord / Họp nhóm trực tiếp</td>
+<td>Trao đổi, thảo luận và xác nhận yêu cầu giữa các thành viên</td>
+</tr>
+<tr>
+<td>4</td>
+<td>GitHub</td>
+<td>Quản lý mã nguồn và theo dõi tiến độ</td>
+</tr>
+</tbody>
+</table>
+<h4>1.2.2. Các kiểu yêu cầu cho dự án</h4>
+<table>
+<thead>
+<tr>
+<th>Loại yêu cầu</th>
+<th>Loại tài liệu</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Yêu cầu của các bên liên quan (STRQ)</td>
+<td>Yêu cầu của các bên liên quan (STR)</td>
+<td>Mô tả các nhu cầu, mong đợi của chủ quán và nhân viên đối với hệ thống</td>
+</tr>
+<tr>
+<td>Yêu cầu tính năng (FEAT)</td>
+<td>Tài liệu tầm nhìn (VIS)</td>
+<td>Mô tả các tính năng tổng quát mà hệ thống cần cung cấp</td>
+</tr>
+<tr>
+<td>Ca sử dụng (UC) / Kịch bản (SC)</td>
+<td>Đặc tả ca sử dụng (UCS)</td>
+<td>Chi tiết các ca sử dụng, phản ánh yêu cầu chức năng</td>
+</tr>
+<tr>
+<td>Yêu cầu bổ sung (SUPL)</td>
+<td>Đặc tả bổ sung (SS)</td>
+<td>Các yêu cầu phi chức năng và ràng buộc hệ thống</td>
+</tr>
+</tbody>
+</table>
+<h3>1.3. Các nhân tố tham gia dự án phần mềm</h3>
+<table>
+<thead>
+<tr>
+<th>Thành viên</th>
+<th>Vai trò</th>
+<th>Nhiệm vụ chính</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thành viên 1</td>
+<td>PM / BA</td>
+<td>Phân tích yêu cầu, lập kế hoạch, quản lý tiến độ dự án</td>
+</tr>
+<tr>
+<td>Thành viên 2</td>
+<td>SA / Design</td>
+<td>Thiết kế kiến trúc, CSDL, giao diện UI/UX</td>
+</tr>
+<tr>
+<td>Thành viên 3</td>
+<td>Backend Dev</td>
+<td>Phát triển Backend (Spring Boot, Design Patterns)</td>
+</tr>
+<tr>
+<td>Thành viên 4</td>
+<td>Frontend Dev</td>
+<td>Phát triển Frontend (React + Vite)</td>
+</tr>
+<tr>
+<td>Thành viên 5</td>
+<td>Tester / DevOps</td>
+<td>Kiểm thử, triển khai và viết tài liệu</td>
+</tr>
+</tbody>
+</table>
+<h3>1.4. Bảng liên lạc với các nhân tố chính (Stakeholder)</h3>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Nhân tố chính</th>
+<th>Vai trò trong dự án</th>
+<th>Trách nhiệm chính</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Chủ quán Cafe</td>
+<td>Nhà tài trợ / Phê duyệt</td>
+<td>Phê duyệt yêu cầu, xem báo cáo doanh thu</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Quản lý quán</td>
+<td>Người sử dụng chính</td>
+<td>Quản lý thực đơn, kho, nhân sự, báo cáo</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Thu ngân (Cashier)</td>
+<td>Người sử dụng</td>
+<td>Tạo đơn hàng POS, thanh toán</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Pha chế (Barista)</td>
+<td>Người sử dụng</td>
+<td>Nhận và xử lý đơn hàng</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Nhóm phát triển</td>
+<td>Thực hiện dự án</td>
+<td>Phân tích, thiết kế, phát triển và triển khai</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Tài liệu yêu cầu người dùng (STR)</h2>
+<h3>2.1. Mục đích</h3>
+<p>Tài liệu này nhằm thu thập và mô tả các nhu cầu, mong đợi và yêu cầu chính của các bên liên quan đối với Hệ thống Quản lý Quán Cafe.</p>
+<h3>2.2. Phạm vi</h3>
+<p>Tài liệu áp dụng cho toàn bộ các yêu cầu của các bên liên quan, bao gồm Chủ quán, Quản lý, Thu ngân, Pha chế.</p>
+<h3>2.3. Yêu cầu thu thập từ Stakeholder</h3>
+<table>
+<thead>
+<tr>
+<th>Stakeholder</th>
+<th>Phương pháp</th>
+<th>Yêu cầu (STRQ)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chủ quán</td>
+<td>Phỏng vấn</td>
+<td><strong>STRQ 1:</strong> Cần hệ thống cho phép đăng nhập, đăng xuất với tài khoản phân quyền (Admin, Quản lý, Thu ngân, Pha chế).</td>
+</tr>
+<tr>
+<td>Chủ quán</td>
+<td>Phỏng vấn</td>
+<td><strong>STRQ 2:</strong> Quản trị viên có thể quản lý tài khoản nhân viên (thêm, sửa, khóa).</td>
+</tr>
+<tr>
+<td>Quản lý quán</td>
+<td>Khảo sát</td>
+<td><strong>STRQ 3:</strong> Quản lý muốn quản lý thực đơn theo dạng danh mục phân cấp và có thể thêm/sửa/xóa món.</td>
+</tr>
+<tr>
+<td>Quản lý quán</td>
+<td>Khảo sát</td>
+<td><strong>STRQ 4:</strong> Quản lý muốn tạo và quản lý các Combo khuyến mãi từ các món có sẵn.</td>
+</tr>
+<tr>
+<td>Thu ngân</td>
+<td>Quan sát</td>
+<td><strong>STRQ 5:</strong> Thu ngân cần tạo đơn hàng POS nhanh chóng, chọn món từ menu, thêm topping và gửi cho pha chế.</td>
+</tr>
+<tr>
+<td>Thu ngân</td>
+<td>Quan sát</td>
+<td><strong>STRQ 6:</strong> Thu ngân cần thanh toán đơn hàng qua nhiều kênh: MoMo, VNPay, Thẻ ngân hàng.</td>
+</tr>
+<tr>
+<td>Thu ngân</td>
+<td>Quan sát</td>
+<td><strong>STRQ 7:</strong> Thu ngân cần in biên lai cho khách hàng sau khi thanh toán.</td>
+</tr>
+<tr>
+<td>Pha chế</td>
+<td>Phỏng vấn</td>
+<td><strong>STRQ 8:</strong> Pha chế cần xem hàng đợi đơn hàng và cập nhật trạng thái.</td>
+</tr>
+<tr>
+<td>Quản lý quán</td>
+<td>Khảo sát</td>
+<td><strong>STRQ 9:</strong> Quản lý cần quản lý kho nguyên liệu: nhập kho, xuất kho, hoàn tác thao tác sai.</td>
+</tr>
+<tr>
+<td>Chủ quán</td>
+<td>Phỏng vấn</td>
+<td><strong>STRQ 10:</strong> Chủ quán muốn xem Dashboard thống kê doanh thu, đơn hàng, cảnh báo tồn kho.</td>
+</tr>
+<tr>
+<td>Thu ngân</td>
+<td>Quan sát</td>
+<td><strong>STRQ 11:</strong> Thu ngân cần đánh dấu đơn hàng VIP ưu tiên.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Tài liệu đặc trưng (VIS)</h2>
+<h3>3.1. Mục đích</h3>
+<p>Tài liệu này định nghĩa tầm nhìn và phạm vi cho dự án Hệ thống Quản lý Quán Cafe.</p>
+<h3>3.2. Phạm vi</h3>
+<ul>
+<li><strong>Trong phạm vi:</strong> Quản lý thực đơn, đơn hàng POS, kho nguyên liệu, thanh toán đa kênh, biên lai, combo, thống kê doanh thu, quản lý tài khoản.</li>
+<li><strong>Ngoài phạm vi:</strong> Quản lý nhân sự chi tiết, đặt hàng online/delivery, chương trình thân thiết.</li>
+</ul>
+<h3>3.3. Tính năng hệ thống</h3>
+<table>
+<thead>
+<tr>
+<th>Yêu cầu (STRQ)</th>
+<th>Tính năng (FEAT)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>STRQ 1</strong></td>
+<td>FEAT 1.1: Đăng nhập bằng tài khoản username/password</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 1.2: Đăng xuất khỏi hệ thống</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 1.3: Phân quyền hiển thị chức năng theo vai trò (ADMIN, MANAGER, CASHIER, BARISTA)</td>
+</tr>
+<tr>
+<td><strong>STRQ 2</strong></td>
+<td>FEAT 2.1: Admin xem danh sách tài khoản</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 2.2: Admin thêm mới tài khoản nhân viên</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 2.3: Admin sửa thông tin tài khoản</td>
+</tr>
+<tr>
+<td><strong>STRQ 3</strong></td>
+<td>FEAT 3.1: Hiển thị thực đơn dạng cây phân cấp (Composite Pattern)</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 3.2: Quản lý thêm món vào danh mục (Factory Pattern)</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 3.3: Quản lý xóa món khỏi thực đơn</td>
+</tr>
+<tr>
+<td><strong>STRQ 4</strong></td>
+<td>FEAT 4.1: Tạo Combo từ các món có sẵn (Prototype Pattern)</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 4.2: Clone Combo template và tính giá giảm cho khách</td>
+</tr>
+<tr>
+<td><strong>STRQ 5</strong></td>
+<td>FEAT 5.1: Chọn món + topping (Decorator Pattern)</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 5.2: Tính tổng tiền tự động</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 5.3: Đặt hàng gửi vào hàng đợi (Command + Singleton Queue)</td>
+</tr>
+<tr>
+<td><strong>STRQ 6</strong></td>
+<td>FEAT 6.1: Thanh toán qua MoMo, VNPay, Thẻ ngân hàng (Adapter Pattern)</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 6.2: Cập nhật trạng thái đơn hàng sau thanh toán</td>
+</tr>
+<tr>
+<td><strong>STRQ 7</strong></td>
+<td>FEAT 7.1: Tạo biên lai điện tử từ template (Prototype Pattern)</td>
+</tr>
+<tr>
+<td><strong>STRQ 8</strong></td>
+<td>FEAT 8.1: Xem hàng đợi đơn hàng (Singleton OrderQueue)</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 8.2: Cập nhật trạng thái đơn: PENDING → PREPARING → DONE</td>
+</tr>
+<tr>
+<td><strong>STRQ 9</strong></td>
+<td>FEAT 9.1: Hiển thị kho dạng cây (Composite Pattern)</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 9.2: Nhập/xuất kho (Command Pattern)</td>
+</tr>
+<tr>
+<td></td>
+<td>FEAT 9.3: Hoàn tác (Undo) thao tác nhập/xuất gần nhất</td>
+</tr>
+<tr>
+<td><strong>STRQ 10</strong></td>
+<td>FEAT 10.1: Dashboard thống kê doanh thu, đơn hàng, cảnh báo tồn kho</td>
+</tr>
+<tr>
+<td><strong>STRQ 11</strong></td>
+<td>FEAT 11.1: Đánh dấu VIP ưu tiên (Priority Decorator)</td>
+</tr>
+</tbody>
+</table>
+<h3>3.4. Ràng buộc và yêu cầu chất lượng</h3>
+<h4>3.4.1. Ràng buộc</h4>
+<ul>
+<li><strong>Công nghệ:</strong> Backend Java Spring Boot, Frontend React + Vite</li>
+<li><strong>CSDL:</strong> MySQL hoặc H2</li>
+<li><strong>Ngôn ngữ giao diện:</strong> 100% Tiếng Việt</li>
+<li><strong>Triển khai:</strong> Chạy trên máy tính tại quầy (On-premise hoặc localhost)</li>
+</ul>
+<h4>3.4.2. Yêu cầu chất lượng</h4>
+<ul>
+<li><strong>Hiệu năng:</strong> Thời gian phản hồi &lt; 2 giây, hỗ trợ 5 người dùng đồng thời</li>
+<li><strong>Bảo mật:</strong> Phân quyền theo vai trò (RBAC)</li>
+<li><strong>Khả dụng:</strong> Hoạt động ổn định trong giờ kinh doanh</li>
+</ul>
+<hr />
+<h2>4. Tài liệu UseCase (UCS)</h2>
+<h3>4.1. Mục đích</h3>
+<p>Mô tả chi tiết các tương tác giữa các tác nhân (Admin, Quản lý, Thu ngân, Pha chế) với hệ thống.</p>
+<h3>4.2. Phạm vi - 15 Use Case</h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hệ thống</td>
+<td>UC01: Đăng nhập, UC02: Đăng xuất</td>
+</tr>
+<tr>
+<td>Quản lý tài khoản</td>
+<td>UC03: Xem danh sách tài khoản, UC04: Thêm tài khoản, UC05: Sửa tài khoản</td>
+</tr>
+<tr>
+<td>Quản lý thực đơn</td>
+<td>UC06: Xem cây thực đơn, UC07: Thêm món, UC08: Xóa món</td>
+</tr>
+<tr>
+<td>Quản lý Combo</td>
+<td>UC09: Đặt Combo cho khách</td>
+</tr>
+<tr>
+<td>Đơn hàng POS</td>
+<td>UC10: Tạo đơn hàng POS, UC11: Cập nhật trạng thái đơn</td>
+</tr>
+<tr>
+<td>Thanh toán</td>
+<td>UC12: Thanh toán đơn hàng, UC13: In biên lai</td>
+</tr>
+<tr>
+<td>Kho nguyên liệu</td>
+<td>UC14: Nhập/Xuất kho (với Undo)</td>
+</tr>
+<tr>
+<td>Dashboard</td>
+<td>UC15: Xem Dashboard thống kê</td>
+</tr>
+</tbody>
+</table>
+<h3>4.3. Sơ đồ Use Case tổng quát</h3>
+<p>```mermaid
+graph LR
+    Admin((Admin))
+    Manager((Quản lý))
+    Cashier((Thu ngân))
+    Barista((Pha chế))</p>
+<pre><code>subgraph "Hệ thống Quản lý Quán Cafe"
+    UC01[UC01: Đăng nhập]
+    UC02[UC02: Đăng xuất]
+    UC03[UC03: Xem DS tài khoản]
+    UC04[UC04: Thêm tài khoản]
+    UC05[UC05: Sửa tài khoản]
+    UC06[UC06: Xem cây thực đơn]
+    UC07[UC07: Thêm món - Factory]
+    UC08[UC08: Xóa món]
+    UC09[UC09: Đặt Combo - Prototype]
+    UC10[UC10: Tạo đơn POS - Decorator]
+    UC11[UC11: Cập nhật trạng thái đơn]
+    UC12[UC12: Thanh toán - Adapter]
+    UC13[UC13: In biên lai - Prototype]
+    UC14[UC14: Nhập/Xuất kho - Command]
+    UC15[UC15: Xem Dashboard]
+end
+
+Admin --&gt; UC01
+Admin --&gt; UC02
+Admin --&gt; UC03
+Admin --&gt; UC04
+Admin --&gt; UC05
+
+Manager --&gt; UC01
+Manager --&gt; UC02
+Manager --&gt; UC06
+Manager --&gt; UC07
+Manager --&gt; UC08
+Manager --&gt; UC09
+Manager --&gt; UC14
+Manager --&gt; UC15
+
+Cashier --&gt; UC01
+Cashier --&gt; UC02
+Cashier --&gt; UC06
+Cashier --&gt; UC09
+Cashier --&gt; UC10
+Cashier --&gt; UC11
+Cashier --&gt; UC12
+Cashier --&gt; UC13
+
+Barista --&gt; UC01
+Barista --&gt; UC02
+Barista --&gt; UC11
+Barista --&gt; UC15
+</code></pre>
+<p>```</p>
+<h3>4.4. Sơ đồ phân rã Module Use Case</h3>
+<p><strong>Module: Quản lý tài khoản (Admin)</strong>
+<code>mermaid
+graph LR
+    Admin((Admin)) --&gt; UC03[UC03: Xem danh sách tài khoản]
+    Admin --&gt; UC04[UC04: Thêm tài khoản]
+    Admin --&gt; UC05[UC05: Sửa tài khoản]</code></p>
+<p><strong>Module: Quản lý thực đơn &amp; Combo (Quản lý)</strong>
+<code>mermaid
+graph LR
+    Manager((Quản lý)) --&gt; UC06[UC06: Xem cây thực đơn - Composite]
+    Manager --&gt; UC07[UC07: Thêm món - Factory]
+    Manager --&gt; UC08[UC08: Xóa món]
+    Manager --&gt; UC09[UC09: Đặt Combo - Prototype]</code></p>
+<p><strong>Module: Đơn hàng POS &amp; Thanh toán (Thu ngân)</strong>
+<code>mermaid
+graph LR
+    Cashier((Thu ngân)) --&gt; UC10[UC10: Tạo đơn POS - Decorator + Command]
+    Cashier --&gt; UC11[UC11: Cập nhật trạng thái đơn]
+    Cashier --&gt; UC12[UC12: Thanh toán - Adapter]
+    Cashier --&gt; UC13[UC13: In biên lai - Prototype]</code></p>
+<hr />
+<h2>5. Kịch bản Use Case (UCS)</h2>
+<h3>5.1. Đặc tả UC01: Đăng nhập</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Đăng nhập</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Admin, Quản lý, Thu ngân, Pha chế</td>
+</tr>
+<tr>
+<td><strong>Mục đích</strong></td>
+<td>Xác thực và truy cập hệ thống dựa trên tài khoản được cấp</td>
+</tr>
+<tr>
+<td><strong>Ưu tiên</strong></td>
+<td>Bắt buộc</td>
+</tr>
+<tr>
+<td><strong>Điều kiện kích hoạt</strong></td>
+<td>Nhấn "Đăng nhập"</td>
+</tr>
+<tr>
+<td><strong>Điều kiện tiên quyết</strong></td>
+<td>Người dùng đã được cấp tài khoản. Hệ thống hoạt động bình thường.</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thành công</strong></td>
+<td>Chuyển đến Dashboard tương ứng với vai trò</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thất bại</strong></td>
+<td>Đăng nhập thất bại, giữ nguyên trang đăng nhập</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính (Basic Flow):</strong>
+1. Người dùng truy cập địa chỉ web hệ thống.
+2. Hệ thống hiển thị màn hình Đăng nhập.
+3. Người dùng nhập <code>Tên đăng nhập</code> và <code>Mật khẩu</code>.
+4. Người dùng nhấn nút "Đăng nhập".
+5. Hệ thống kiểm tra tính hợp lệ (không để trống).
+6. Hệ thống xác thực thông tin tài khoản với CSDL.
+7. Hệ thống xác định vai trò (ADMIN / MANAGER / CASHIER / BARISTA).
+8. Hệ thống chuyển hướng đến Dashboard tương ứng.</p>
+<p><strong>Luồng sự kiện ngoại lệ:</strong>
+- <strong>E1:</strong> Tại bước 5, trường dữ liệu trống → "Vui lòng nhập đầy đủ". Quay bước 3.
+- <strong>E2:</strong> Tại bước 6, thông tin không khớp → "Sai tên đăng nhập hoặc mật khẩu". Quay bước 3.</p>
+<h3>5.2. Đặc tả UC02: Đăng xuất</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Đăng xuất</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Admin, Quản lý, Thu ngân, Pha chế</td>
+</tr>
+<tr>
+<td><strong>Mục đích</strong></td>
+<td>Thoát khỏi phiên làm việc hiện tại an toàn</td>
+</tr>
+<tr>
+<td><strong>Điều kiện tiên quyết</strong></td>
+<td>Đang trong phiên đăng nhập hợp lệ</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thành công</strong></td>
+<td>Phiên bị hủy. Chuyển về trang Đăng nhập.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Người dùng chọn "Đăng xuất".
+2. Hệ thống hủy session hiện tại.
+3. Hệ thống chuyển hướng về trang Đăng nhập.</p>
+<h3>5.3. Đặc tả UC03: Xem danh sách tài khoản</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Xem danh sách tài khoản</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Admin</td>
+</tr>
+<tr>
+<td><strong>Mục đích</strong></td>
+<td>Xem, tìm kiếm danh sách tài khoản người dùng</td>
+</tr>
+<tr>
+<td><strong>Điều kiện tiên quyết</strong></td>
+<td>Admin đã đăng nhập</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thành công</strong></td>
+<td>Danh sách tài khoản hiển thị đầy đủ</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Admin chọn menu "Quản lý tài khoản".
+2. Hệ thống hiển thị danh sách (ID, Username, Role).
+3. Admin có thể tìm kiếm theo username.
+4. Hệ thống hiển thị kết quả tương ứng.</p>
+<h3>5.4. Đặc tả UC04: Thêm tài khoản</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Thêm mới tài khoản</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Admin</td>
+</tr>
+<tr>
+<td><strong>Mục đích</strong></td>
+<td>Tạo tài khoản mới cho nhân viên</td>
+</tr>
+<tr>
+<td><strong>Điều kiện tiên quyết</strong></td>
+<td>Admin đã đăng nhập</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thành công</strong></td>
+<td>Tài khoản mới được lưu vào CSDL</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thất bại</strong></td>
+<td>Tài khoản không được tạo do ràng buộc</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Admin nhấn "Thêm tài khoản".
+2. Hệ thống hiển thị form: Username, Password, Role (MANAGER / CASHIER / BARISTA).
+3. Admin nhập thông tin và nhấn "Lưu".
+4. Hệ thống kiểm tra: username không trống, không trùng, password hợp lệ.
+5. Hệ thống lưu và thông báo thành công.</p>
+<p><strong>Luồng sự kiện ngoại lệ:</strong>
+- <strong>E1:</strong> Username trùng → "Tên đăng nhập đã tồn tại". Quay bước 2.
+- <strong>E2:</strong> Thiếu thông tin → Cảnh báo. Quay bước 2.
+- <strong>E3:</strong> Nhấn "Hủy" → Quay lại danh sách.</p>
+<h3>5.5. Đặc tả UC05: Sửa tài khoản</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Sửa thông tin tài khoản</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Admin</td>
+</tr>
+<tr>
+<td><strong>Mục đích</strong></td>
+<td>Cập nhật thông tin tài khoản (Role, Password)</td>
+</tr>
+<tr>
+<td><strong>Điều kiện tiên quyết</strong></td>
+<td>Admin đã đăng nhập. Tài khoản cần sửa đã tồn tại.</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thành công</strong></td>
+<td>Thông tin tài khoản được cập nhật</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Admin nhấn "Sửa" trên một tài khoản.
+2. Hệ thống hiển thị form (Username readonly, Role, Password).
+3. Admin thay đổi thông tin và nhấn "Lưu".
+4. Hệ thống validate và lưu thay đổi.</p>
+<p><strong>Luồng sự kiện ngoại lệ:</strong>
+- <strong>E1:</strong> Dữ liệu không hợp lệ → Thông báo lỗi.
+- <strong>E2:</strong> Nhấn "Hủy" → Quay lại danh sách.</p>
+<h3>5.6. Đặc tả UC06: Xem cây thực đơn (Composite)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Xem cây thực đơn</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Quản lý, Thu ngân</td>
+</tr>
+<tr>
+<td><strong>Mục đích</strong></td>
+<td>Hiển thị toàn bộ thực đơn dạng cây: Danh mục → Món</td>
+</tr>
+<tr>
+<td><strong>Design Pattern</strong></td>
+<td><strong>Composite</strong> – MenuComponent → MenuCategory + MenuItem</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thành công</strong></td>
+<td>Cây thực đơn hiển thị đầy đủ</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Chọn menu "Quản lý thực đơn".
+2. Hệ thống truy xuất cây thực đơn (Composite Pattern).
+3. Hiển thị: Đồ uống nóng / Đồ uống lạnh / Bánh ngọt → Các món.
+4. Người dùng có thể mở rộng/thu gọn từng danh mục.</p>
+<h3>5.7. Đặc tả UC07: Thêm món vào thực đơn (Factory)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Thêm món vào thực đơn</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Quản lý</td>
+</tr>
+<tr>
+<td><strong>Mục đích</strong></td>
+<td>Thêm món mới vào danh mục</td>
+</tr>
+<tr>
+<td><strong>Design Pattern</strong></td>
+<td><strong>Factory Method</strong> – BeverageFactory tạo Coffee / MilkTea / Smoothie</td>
+</tr>
+<tr>
+<td><strong>Điều kiện tiên quyết</strong></td>
+<td>Đã đăng nhập. Danh mục cha tồn tại.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Quản lý chọn danh mục (VD: "Đồ uống lạnh").
+2. Nhấn "Thêm món".
+3. Hệ thống hiển thị form: Tên, Giá, Loại (COFFEE / MILK_TEA / SMOOTHIE / PASTRY), Mô tả.
+4. Quản lý nhập thông tin và nhấn "Lưu".
+5. Hệ thống dùng <strong>BeverageFactory</strong> tạo đối tượng tương ứng.
+6. Thêm món vào danh mục và thông báo thành công.</p>
+<p><strong>Luồng sự kiện ngoại lệ:</strong>
+- <strong>E1:</strong> Thiếu tên/giá → Cảnh báo, không lưu.
+- <strong>E2:</strong> Giá âm hoặc không hợp lệ → Cảnh báo.
+- <strong>E3:</strong> Nhấn "Hủy" → Quay lại cây.</p>
+<h3>5.8. Đặc tả UC08: Xóa món khỏi thực đơn</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Xóa món</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Quản lý</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thành công</strong></td>
+<td>Món bị xóa khỏi cây thực đơn</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Chọn món trong cây thực đơn.
+2. Nhấn "Xóa".
+3. Hệ thống hiển thị hộp thoại xác nhận.
+4. Xác nhận xóa.
+5. Hệ thống xóa và cập nhật cây.</p>
+<p><strong>Ngoại lệ:</strong> Nhấn "Hủy" → Không xóa.</p>
+<h3>5.9. Đặc tả UC09: Đặt Combo cho khách (Prototype)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Đặt Combo</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Thu ngân, Quản lý</td>
+</tr>
+<tr>
+<td><strong>Design Pattern</strong></td>
+<td><strong>Prototype</strong> – Deep clone ComboTemplate</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thành công</strong></td>
+<td>Combo clone thành công, giá giảm đúng</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Chọn tab "Combo" → Hiển thị danh sách Combo template.
+2. Chọn Combo và nhập tên khách.
+3. Hệ thống <strong>Deep Clone</strong> từ template (Prototype).
+4. Tính giá: <code>Tổng gốc × (1 - discount%)</code>.
+5. Tạo đơn hàng Combo thành công.</p>
+<h3>5.10. Đặc tả UC10: Tạo đơn hàng POS (Decorator + Command + Singleton)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Tạo đơn hàng POS</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Thu ngân</td>
+</tr>
+<tr>
+<td><strong>Design Pattern</strong></td>
+<td><strong>Decorator</strong> (topping), <strong>Command</strong> (PlaceOrderCommand), <strong>Singleton</strong> (OrderQueue)</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thành công</strong></td>
+<td>Đơn hàng mới được push vào OrderQueue</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Thu ngân mở trang "Đặt hàng POS".
+2. Nhập tên khách hàng.
+3. Chọn món từ danh sách → Thêm vào giỏ.
+4. Chọn topping cho từng món: <strong>Decorator Pattern</strong> → <code>BaseBeverage + ToppingDecorator(...)</code>.
+5. Giá tự động cộng thêm giá mỗi topping.
+6. Chọn số lượng.
+7. (Tùy chọn) Đánh dấu "VIP Ưu tiên" → <strong>PriorityDecorator</strong>.
+8. Nhấn "Đặt hàng".
+9. Hệ thống tạo <strong>PlaceOrderCommand</strong> → execute → push vào <strong>OrderQueue (Singleton)</strong>.
+10. Thông báo "Đặt hàng thành công!".</p>
+<p><strong>Luồng sự kiện ngoại lệ:</strong>
+- <strong>E1:</strong> Giỏ trống → "Chọn ít nhất 1 món".
+- <strong>E2:</strong> Nhấn "Hủy đơn" → <strong>CancelOrderCommand</strong>, trạng thái → CANCELLED.</p>
+<h3>5.11. Đặc tả UC11: Cập nhật trạng thái đơn hàng</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Cập nhật trạng thái đơn hàng</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Pha chế, Thu ngân</td>
+</tr>
+<tr>
+<td><strong>Mục đích</strong></td>
+<td>Cập nhật: PENDING → PREPARING → DONE / CANCELLED</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Xem danh sách đơn hàng.
+2. Chọn đơn cần cập nhật.
+3. Nhấn nút thay đổi trạng thái.
+4. Hệ thống cập nhật trạng thái.</p>
+<h3>5.12. Đặc tả UC12: Thanh toán đơn hàng (Adapter)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Thanh toán đơn hàng</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Thu ngân</td>
+</tr>
+<tr>
+<td><strong>Design Pattern</strong></td>
+<td><strong>Adapter</strong> – PaymentGateway → MomoAdapter, VNPayAdapter, BankCardAdapter</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thành công</strong></td>
+<td>Thanh toán thành công, đơn hàng → DONE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Chọn menu "Thanh toán".
+2. Hiển thị danh sách đơn chưa thanh toán.
+3. Chọn đơn hàng.
+4. Chọn phương thức: <strong>MOMO</strong> / <strong>VNPAY</strong> / <strong>BANK_CARD</strong>.
+5. Hệ thống gọi Adapter tương ứng → chuyển đổi sang SDK bên thứ 3.
+6. Nhận <code>transactionId</code> từ cổng thanh toán.
+7. Lưu log thanh toán, cập nhật đơn → DONE.
+8. Thông báo "Thanh toán thành công!".</p>
+<p><strong>Ngoại lệ:</strong> Cổng từ chối → "Thanh toán thất bại!".</p>
+<h3>5.13. Đặc tả UC13: In biên lai (Prototype)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>In biên lai</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Thu ngân</td>
+</tr>
+<tr>
+<td><strong>Design Pattern</strong></td>
+<td><strong>Prototype</strong> – Deep clone ReceiptTemplate</td>
+</tr>
+<tr>
+<td><strong>Điều kiện tiên quyết</strong></td>
+<td>Đơn hàng đã thanh toán thành công</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Nhấn "In biên lai".
+2. Hệ thống lấy <strong>ReceiptTemplate</strong> (header, địa chỉ, SĐT, footer).
+3. <strong>Deep Clone</strong> template và điền thông tin động: mã biên lai, tên khách, món, tổng tiền, phương thức TT, mã giao dịch.
+4. Hiển thị biên lai dạng modal.
+5. Thu ngân có thể in hoặc đóng.</p>
+<h3>5.14. Đặc tả UC14: Nhập/Xuất kho với Undo (Composite + Command)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Nhập/Xuất kho nguyên liệu</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Quản lý</td>
+</tr>
+<tr>
+<td><strong>Design Pattern</strong></td>
+<td><strong>Composite</strong> (InventoryContainer → InventoryItem), <strong>Command</strong> (Import/ExportCommand + Undo)</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thành công</strong></td>
+<td>Số lượng cập nhật đúng. Lịch sử ghi nhận.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Mở "Quản lý kho".
+2. Hiển thị cây kho (Composite): Khu vực → Nguyên liệu.
+3. Chọn nguyên liệu.
+4. Chọn <strong>NHẬP KHO</strong> hoặc <strong>XUẤT KHO</strong>.
+5. Nhập số lượng.
+6. Hệ thống tạo <strong>ImportCommand/ExportCommand</strong> → execute.
+7. Cập nhật số lượng và ghi CommandLog.
+8. Thông báo thành công.
+9. (Tùy chọn) Nhấn "Hoàn tác" → <strong>Undo</strong> command gần nhất chưa undo.</p>
+<p><strong>Luồng sự kiện ngoại lệ:</strong>
+- <strong>E1:</strong> Xuất vượt tồn kho → quantity = 0 (không âm).
+- <strong>E2:</strong> Không có command để undo → "Không có thao tác nào để hoàn tác!".</p>
+<h3>5.15. Đặc tả UC15: Xem Dashboard thống kê</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tên use case</strong></td>
+<td>Xem Dashboard</td>
+</tr>
+<tr>
+<td><strong>Tác nhân chính</strong></td>
+<td>Quản lý, Pha chế</td>
+</tr>
+<tr>
+<td><strong>Điều kiện thành công</strong></td>
+<td>Dashboard hiển thị đầy đủ chỉ số</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Luồng sự kiện chính:</strong>
+1. Truy cập trang Dashboard.
+2. Hệ thống tính toán và hiển thị:
+   - <strong>Doanh thu hôm nay:</strong> Tổng tiền đơn DONE.
+   - <strong>Tổng đơn hàng:</strong> Số đơn trong ngày.
+   - <strong>Cảnh báo tồn kho:</strong> Nguyên liệu quantity &lt; 20.
+   - <strong>Lượng khách POS:</strong> Đơn không bị CANCELLED.
+3. Hiển thị <strong>biểu đồ xu hướng doanh thu</strong> tuần.
+4. Hiển thị <strong>danh sách nguyên liệu sắp hết</strong>.
+5. Hiển thị <strong>bảng đơn hàng gần đây</strong> (5 đơn mới nhất).</p>
+<hr />
+<h2>6. Yêu cầu phi chức năng</h2>
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Yêu cầu</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NFR-01</td>
+<td>Hiệu năng</td>
+<td>Phản hồi &lt; 2 giây</td>
+</tr>
+<tr>
+<td>NFR-02</td>
+<td>Mở rộng</td>
+<td>Thêm cổng thanh toán mới chỉ cần implement PaymentGateway adapter</td>
+</tr>
+<tr>
+<td>NFR-03</td>
+<td>Bảo mật</td>
+<td>Mật khẩu mã hóa. Phân quyền RBAC.</td>
+</tr>
+<tr>
+<td>NFR-04</td>
+<td>Giao diện</td>
+<td>100% Tiếng Việt, responsive</td>
+</tr>
+<tr>
+<td>NFR-05</td>
+<td>Nhất quán</td>
+<td>Dữ liệu kho nhất quán sau mỗi nhập/xuất/undo</td>
+</tr>
+<tr>
+<td>NFR-06</td>
+<td>Bảo trì</td>
+<td>Design Pattern chuẩn giúp dễ mở rộng logic</td>
+</tr>
+<tr>
+<td>NFR-07</td>
+<td>Tương thích</td>
+<td>Chrome, Firefox, Edge</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>II. LẬP KẾ HOẠCH DỰ ÁN</h1>
+<h2>1. Bảng phân chia công việc</h2>
+<table>
+<thead>
+<tr>
+<th>Thành viên</th>
+<th>Vai trò</th>
+<th>Nhiệm vụ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thành viên 1</td>
+<td>PM / BA</td>
+<td>Phân tích yêu cầu, viết tài liệu RMP, STR, VIS, lập kế hoạch</td>
+</tr>
+<tr>
+<td>Thành viên 2</td>
+<td>SA / Design</td>
+<td>Thiết kế Use Case, Activity/Sequence Diagram, CSDL, Class Diagram</td>
+</tr>
+<tr>
+<td>Thành viên 3</td>
+<td>Backend Dev</td>
+<td>Phát triển Java Spring Boot: Entity, Repository, Design Patterns</td>
+</tr>
+<tr>
+<td>Thành viên 4</td>
+<td>Frontend Dev</td>
+<td>Phát triển React: Dashboard, MenuPage, OrderPage, InventoryPage, PaymentPage</td>
+</tr>
+<tr>
+<td>Thành viên 5</td>
+<td>Tester / DevOps</td>
+<td>Kiểm thử, triển khai</td>
+</tr>
+</tbody>
+</table>
+<h2>2. Công nghệ sử dụng</h2>
+<table>
+<thead>
+<tr>
+<th>Thành phần</th>
+<th>Công nghệ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend</td>
+<td>Java 17 + Spring Boot 2.x</td>
+</tr>
+<tr>
+<td>Frontend</td>
+<td>React 19 + Vite 6.x</td>
+</tr>
+<tr>
+<td>UI Library</td>
+<td>Recharts (biểu đồ), Lucide React (icons)</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>MySQL / H2</td>
+</tr>
+<tr>
+<td>Build</td>
+<td>Maven (BE), npm (FE)</td>
+</tr>
+<tr>
+<td>Version Control</td>
+<td>Git + GitHub</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>III. PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG</h1>
+<h2>1. Biểu đồ hoạt động</h2>
+<h3>1.1. UC01: Đăng nhập</h3>
+<p><code>mermaid
+flowchart TD
+    A([Bắt đầu]) --&gt; B[Truy cập trang đăng nhập]
+    B --&gt; C[Nhập Tên đăng nhập và Mật khẩu]
+    C --&gt; D[Nhấn Đăng nhập]
+    D --&gt; E{Dữ liệu có trống?}
+    E -- Có --&gt; F[Hiển thị: Vui lòng nhập đầy đủ]
+    F --&gt; C
+    E -- Không --&gt; G{Xác thực tài khoản}
+    G -- Sai --&gt; H[Hiển thị: Sai tên đăng nhập hoặc mật khẩu]
+    H --&gt; C
+    G -- Đúng --&gt; I[Xác định vai trò người dùng]
+    I --&gt; J[Chuyển hướng đến Dashboard]
+    J --&gt; K([Kết thúc])</code></p>
+<h3>1.2. UC02: Đăng xuất</h3>
+<p><code>mermaid
+flowchart TD
+    A([Bắt đầu]) --&gt; B[Nhấn Đăng xuất]
+    B --&gt; C[Hủy session hiện tại]
+    C --&gt; D[Chuyển về trang Đăng nhập]
+    D --&gt; E([Kết thúc])</code></p>
+<h3>1.3. UC04: Thêm tài khoản</h3>
+<p><code>mermaid
+flowchart TD
+    A([Bắt đầu]) --&gt; B[Admin nhấn Thêm tài khoản]
+    B --&gt; C[Hiển thị form: Username, Password, Role]
+    C --&gt; D[Admin nhập thông tin]
+    D --&gt; E[Nhấn Lưu]
+    E --&gt; F{Dữ liệu hợp lệ?}
+    F -- Không --&gt; G[Hiển thị lỗi]
+    G --&gt; C
+    F -- Có --&gt; H[Lưu tài khoản vào CSDL]
+    H --&gt; I[Thông báo thành công]
+    I --&gt; J([Kết thúc])</code></p>
+<h3>1.4. UC07: Thêm món vào thực đơn (Factory)</h3>
+<p><code>mermaid
+flowchart TD
+    A([Bắt đầu]) --&gt; B[Quản lý chọn Danh mục cha]
+    B --&gt; C[Nhấn Thêm món]
+    C --&gt; D[Hiển thị form: Tên, Giá, Loại, Mô tả]
+    D --&gt; E[Nhập thông tin, nhấn Lưu]
+    E --&gt; F{Dữ liệu hợp lệ?}
+    F -- Không --&gt; G[Cảnh báo lỗi]
+    G --&gt; D
+    F -- Có --&gt; H["BeverageFactory.create(type)"]
+    H --&gt; I[Thêm món vào danh mục Composite]
+    I --&gt; J[Thông báo thành công]
+    J --&gt; K([Kết thúc])</code></p>
+<h3>1.5. UC09: Đặt Combo (Prototype)</h3>
+<p><code>mermaid
+flowchart TD
+    A([Bắt đầu]) --&gt; B[Chọn tab Combo]
+    B --&gt; C[Hiển thị danh sách Combo template]
+    C --&gt; D[Chọn Combo + nhập tên khách]
+    D --&gt; E["Deep Clone template (Prototype)"]
+    E --&gt; F["Tính giá giảm"]
+    F --&gt; G[Tạo đơn hàng Combo]
+    G --&gt; H[Thông báo thành công]
+    H --&gt; I([Kết thúc])</code></p>
+<h3>1.6. UC10: Tạo đơn hàng POS (Decorator + Command)</h3>
+<p><code>mermaid
+flowchart TD
+    A([Bắt đầu]) --&gt; B[Mở trang Đặt hàng POS]
+    B --&gt; C[Nhập tên khách hàng]
+    C --&gt; D[Chọn món từ danh sách]
+    D --&gt; E{Thêm Topping?}
+    E -- Có --&gt; F["Decorator: Base + Topping"]
+    F --&gt; G[Cập nhật giá]
+    G --&gt; H[Chọn số lượng]
+    E -- Không --&gt; H
+    H --&gt; I{Thêm món khác?}
+    I -- Có --&gt; D
+    I -- Không --&gt; J{Đánh dấu VIP?}
+    J -- Có --&gt; K["PriorityDecorator"]
+    J -- Không --&gt; L[Nhấn Đặt hàng]
+    K --&gt; L
+    L --&gt; M{Giỏ trống?}
+    M -- Có --&gt; N[Cảnh báo]
+    N --&gt; D
+    M -- Không --&gt; O["PlaceOrderCommand.execute()"]
+    O --&gt; P["Push vào OrderQueue Singleton"]
+    P --&gt; Q[Thông báo thành công]
+    Q --&gt; R([Kết thúc])</code></p>
+<h3>1.7. UC12: Thanh toán đơn hàng (Adapter)</h3>
+<p><code>mermaid
+flowchart TD
+    A([Bắt đầu]) --&gt; B[Chọn trang Thanh toán]
+    B --&gt; C[Hiển thị đơn chưa thanh toán]
+    C --&gt; D[Chọn đơn hàng]
+    D --&gt; E[Chọn phương thức thanh toán]
+    E --&gt; F{Phương thức?}
+    F -- MOMO --&gt; G["MomoAdapter.pay()"]
+    F -- VNPAY --&gt; H["VNPayAdapter.pay()"]
+    F -- BANK_CARD --&gt; I["BankCardAdapter.pay()"]
+    G --&gt; J{OK?}
+    H --&gt; J
+    I --&gt; J
+    J -- Thất bại --&gt; K[Thông báo thất bại]
+    K --&gt; E
+    J -- Thành công --&gt; L[Nhận transactionId]
+    L --&gt; M[Lưu log + cập nhật đơn → DONE]
+    M --&gt; N[Thông báo thành công]
+    N --&gt; O([Kết thúc])</code></p>
+<h3>1.8. UC13: In biên lai (Prototype)</h3>
+<p><code>mermaid
+flowchart TD
+    A([Bắt đầu]) --&gt; B[Nhấn In biên lai]
+    B --&gt; C[Lấy ReceiptTemplate]
+    C --&gt; D["Deep Clone template"]
+    D --&gt; E[Điền thông tin động]
+    E --&gt; F[Hiển thị modal biên lai]
+    F --&gt; G{In?}
+    G -- Có --&gt; H[Gửi lệnh in]
+    G -- Không --&gt; I[Đóng modal]
+    H --&gt; I
+    I --&gt; J([Kết thúc])</code></p>
+<h3>1.9. UC14: Nhập/Xuất kho với Undo (Command)</h3>
+<p><code>mermaid
+flowchart TD
+    A([Bắt đầu]) --&gt; B[Mở Quản lý kho]
+    B --&gt; C[Hiển thị cây kho Composite]
+    C --&gt; D[Chọn nguyên liệu]
+    D --&gt; E{Hành động?}
+    E -- Nhập kho --&gt; F[Nhập số lượng]
+    F --&gt; G["ImportCommand.execute()"]
+    E -- Xuất kho --&gt; H[Nhập số lượng xuất]
+    H --&gt; I["ExportCommand.execute()"]
+    E -- Hoàn tác --&gt; J{Có command chưa undo?}
+    J -- Không --&gt; K[Thông báo: Không có thao tác]
+    K --&gt; C
+    J -- Có --&gt; L["Undo command gần nhất"]
+    L --&gt; M[Đảo ngược số lượng]
+    G --&gt; N[Cập nhật số lượng + ghi CommandLog]
+    I --&gt; N
+    M --&gt; N
+    N --&gt; O[Thông báo thành công]
+    O --&gt; P([Kết thúc])</code></p>
+<h3>1.10. UC15: Xem Dashboard</h3>
+<p><code>mermaid
+flowchart TD
+    A([Bắt đầu]) --&gt; B[Truy cập Dashboard]
+    B --&gt; C[Truy xuất dữ liệu Orders + Inventory]
+    C --&gt; D[Tính Doanh thu + Tổng đơn]
+    D --&gt; E["Tìm nguyên liệu quantity &lt; 20"]
+    E --&gt; F[Hiển thị 4 card thống kê]
+    F --&gt; G[Hiển thị biểu đồ doanh thu tuần]
+    G --&gt; H[Hiển thị cảnh báo tồn kho]
+    H --&gt; I[Hiển thị bảng đơn gần đây]
+    I --&gt; J([Kết thúc])</code></p>
+<hr />
+<h2>2. Biểu đồ tuần tự</h2>
+<h3>2.1. UC01: Đăng nhập</h3>
+<p>```mermaid
+sequenceDiagram
+    actor User as Người dùng
+    participant UI as Trang Đăng nhập
+    participant Ctrl as AuthController
+    participant DB as Database</p>
+<pre><code>User-&gt;&gt;UI: Nhập username + password
+User-&gt;&gt;UI: Nhấn Đăng nhập
+UI-&gt;&gt;Ctrl: login(username, password)
+Ctrl-&gt;&gt;Ctrl: validate(username, password)
+alt Dữ liệu trống
+    Ctrl--&gt;&gt;UI: Lỗi: Nhập đầy đủ
+else Dữ liệu hợp lệ
+    Ctrl-&gt;&gt;DB: findByUsername(username)
+    DB--&gt;&gt;Ctrl: User object
+    alt Sai mật khẩu
+        Ctrl--&gt;&gt;UI: Lỗi: Sai thông tin
+    else Đúng
+        Ctrl--&gt;&gt;UI: Thành công + Role
+        UI-&gt;&gt;UI: Chuyển hướng Dashboard
+    end
+end
+</code></pre>
+<p>```</p>
+<h3>2.2. UC07: Thêm món (Factory)</h3>
+<p>```mermaid
+sequenceDiagram
+    actor Manager as Quản lý
+    participant UI as MenuPage
+    participant Svc as MockService
+    participant Fac as BeverageFactory</p>
+<pre><code>Manager-&gt;&gt;UI: Chọn Danh mục, nhấn Thêm món
+UI-&gt;&gt;UI: Hiển thị form
+Manager-&gt;&gt;UI: Nhập tên, giá, loại
+Manager-&gt;&gt;UI: Nhấn Lưu
+UI-&gt;&gt;Svc: addMenuItem(parentId, itemData)
+Svc-&gt;&gt;Fac: create(beverageType)
+alt COFFEE
+    Fac--&gt;&gt;Svc: new Coffee()
+else MILK_TEA
+    Fac--&gt;&gt;Svc: new MilkTea()
+else SMOOTHIE
+    Fac--&gt;&gt;Svc: new Smoothie()
+end
+Svc-&gt;&gt;Svc: addToCategory + saveMenuTree
+Svc--&gt;&gt;UI: newItem
+UI--&gt;&gt;Manager: Thông báo thành công
+</code></pre>
+<p>```</p>
+<h3>2.3. UC10: Tạo đơn hàng POS (Decorator + Command)</h3>
+<p>```mermaid
+sequenceDiagram
+    actor Cashier as Thu ngân
+    participant UI as OrderPage
+    participant Dec as DecoratorService
+    participant Cmd as PlaceOrderCommand
+    participant Queue as OrderQueue Singleton</p>
+<pre><code>Cashier-&gt;&gt;UI: Chọn món + topping + số lượng
+UI-&gt;&gt;Dec: calculateDecoratedCost(baseItem, toppingIds)
+Dec-&gt;&gt;Dec: BaseBeverage(price)
+Dec-&gt;&gt;Dec: +ToppingDecorator(trân châu +5000)
+Dec-&gt;&gt;Dec: +ToppingDecorator(kem tươi +7000)
+Dec--&gt;&gt;UI: description + cost
+Cashier-&gt;&gt;UI: Đánh dấu VIP
+Cashier-&gt;&gt;UI: Nhấn Đặt hàng
+UI-&gt;&gt;Cmd: new PlaceOrderCommand(orderData)
+Cmd-&gt;&gt;Cmd: execute()
+Cmd-&gt;&gt;Queue: push(order)
+Queue--&gt;&gt;UI: order saved
+UI--&gt;&gt;Cashier: Đặt hàng thành công
+</code></pre>
+<p>```</p>
+<h3>2.4. UC12: Thanh toán (Adapter)</h3>
+<p>```mermaid
+sequenceDiagram
+    actor Cashier as Thu ngân
+    participant UI as PaymentPage
+    participant Svc as MockService
+    participant Adp as PaymentAdapter
+    participant SDK as SDK bên thứ 3</p>
+<pre><code>Cashier-&gt;&gt;UI: Chọn đơn + phương thức
+Cashier-&gt;&gt;UI: Nhấn Thanh toán
+UI-&gt;&gt;Svc: processPayment(orderId, method, amount)
+alt MOMO
+    Svc-&gt;&gt;Adp: MomoAdapter.pay(amount)
+    Adp-&gt;&gt;SDK: MomoSDK.processWallet()
+else VNPAY
+    Svc-&gt;&gt;Adp: VNPayAdapter.pay(amount)
+    Adp-&gt;&gt;SDK: VNPaySDK.generateQR()
+else BANK_CARD
+    Svc-&gt;&gt;Adp: BankCardAdapter.pay(amount)
+    Adp-&gt;&gt;SDK: BankCardSDK.swipeCard()
+end
+SDK--&gt;&gt;Adp: transactionId
+Adp--&gt;&gt;Svc: PaymentResult
+Svc-&gt;&gt;Svc: Lưu log + updateOrderStatus DONE
+Svc--&gt;&gt;UI: paymentLog
+UI--&gt;&gt;Cashier: Thanh toán thành công
+</code></pre>
+<p>```</p>
+<h3>2.5. UC14: Nhập/Xuất kho với Undo (Command)</h3>
+<p>```mermaid
+sequenceDiagram
+    actor Manager as Quản lý
+    participant UI as InventoryPage
+    participant Svc as MockService
+    participant Cmd as InventoryCommand</p>
+<pre><code>Manager-&gt;&gt;UI: Chọn nguyên liệu, Nhập kho, số lượng: 10
+UI-&gt;&gt;Svc: executeInventoryCommand(IMPORT, itemId, 10)
+Svc-&gt;&gt;Cmd: new ImportCommand(itemId, 10)
+Cmd-&gt;&gt;Cmd: execute() quantity += 10
+Svc-&gt;&gt;Svc: Ghi CommandLog
+Svc--&gt;&gt;UI: commandLog
+UI--&gt;&gt;Manager: Thành công
+
+Note over Manager,Cmd: Phát hiện nhập sai...
+
+Manager-&gt;&gt;UI: Nhấn Hoàn tác
+UI-&gt;&gt;Svc: undoLastInventoryCommand()
+Svc-&gt;&gt;Svc: Tìm command chưa undo
+Svc-&gt;&gt;Cmd: undo() quantity -= 10
+Svc-&gt;&gt;Svc: Đánh dấu undone = true
+Svc--&gt;&gt;UI: undone command
+UI--&gt;&gt;Manager: Hoàn tác thành công
+</code></pre>
+<p>```</p>
+<hr />
+<h2>3. Thiết kế cơ sở dữ liệu</h2>
+<h3>3.1. Các thực thể và thuộc tính</h3>
+<table>
+<thead>
+<tr>
+<th>Thực thể</th>
+<th>Thuộc tính</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>User</strong></td>
+<td>id (PK), username, password, role</td>
+</tr>
+<tr>
+<td><strong>Drink</strong></td>
+<td>id (PK), name, price, description, type</td>
+</tr>
+<tr>
+<td><strong>Order</strong></td>
+<td>id (PK), customerName, createdAt, status</td>
+</tr>
+<tr>
+<td><strong>OrderItem</strong></td>
+<td>id (PK), drink_id (FK), order_id (FK), quantity</td>
+</tr>
+<tr>
+<td><strong>Inventory</strong></td>
+<td>id (PK), name, quantity, unit</td>
+</tr>
+<tr>
+<td><strong>InventoryHistory</strong></td>
+<td>id (PK), inventory_id (FK), amountChanged, changedAt, reason</td>
+</tr>
+</tbody>
+</table>
+<h3>3.2. Chi tiết các bảng</h3>
+<h4>Bảng <code>users</code></h4>
+<table>
+<thead>
+<tr>
+<th>Cột</th>
+<th>Kiểu</th>
+<th>Ràng buộc</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>Mã tài khoản</td>
+</tr>
+<tr>
+<td>username</td>
+<td>VARCHAR(50)</td>
+<td>NOT NULL, UNIQUE</td>
+<td>Tên đăng nhập</td>
+</tr>
+<tr>
+<td>password</td>
+<td>VARCHAR(255)</td>
+<td>NOT NULL</td>
+<td>Mật khẩu</td>
+</tr>
+<tr>
+<td>role</td>
+<td>VARCHAR(20)</td>
+<td>NOT NULL</td>
+<td>ADMIN, MANAGER, CASHIER, BARISTA</td>
+</tr>
+</tbody>
+</table>
+<h4>Bảng <code>drinks</code></h4>
+<table>
+<thead>
+<tr>
+<th>Cột</th>
+<th>Kiểu</th>
+<th>Ràng buộc</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>Mã đồ uống</td>
+</tr>
+<tr>
+<td>name</td>
+<td>VARCHAR(100)</td>
+<td>NOT NULL</td>
+<td>Tên</td>
+</tr>
+<tr>
+<td>price</td>
+<td>INT</td>
+<td>NOT NULL</td>
+<td>Giá (VND)</td>
+</tr>
+<tr>
+<td>description</td>
+<td>VARCHAR(500)</td>
+<td></td>
+<td>Mô tả</td>
+</tr>
+<tr>
+<td>type</td>
+<td>VARCHAR(30)</td>
+<td>NOT NULL</td>
+<td>Coffee, MilkTea, Smoothie, Pastry</td>
+</tr>
+</tbody>
+</table>
+<h4>Bảng <code>orders</code></h4>
+<table>
+<thead>
+<tr>
+<th>Cột</th>
+<th>Kiểu</th>
+<th>Ràng buộc</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>Mã đơn</td>
+</tr>
+<tr>
+<td>customer_name</td>
+<td>VARCHAR(100)</td>
+<td>NOT NULL</td>
+<td>Tên khách</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>DATETIME</td>
+<td>NOT NULL</td>
+<td>Thời gian tạo</td>
+</tr>
+<tr>
+<td>status</td>
+<td>VARCHAR(20)</td>
+<td>NOT NULL</td>
+<td>PENDING, PREPARING, DONE, CANCELLED</td>
+</tr>
+</tbody>
+</table>
+<h4>Bảng <code>order_items</code></h4>
+<table>
+<thead>
+<tr>
+<th>Cột</th>
+<th>Kiểu</th>
+<th>Ràng buộc</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>Mã chi tiết</td>
+</tr>
+<tr>
+<td>drink_id</td>
+<td>BIGINT</td>
+<td>FK → drinks(id)</td>
+<td>Mã đồ uống</td>
+</tr>
+<tr>
+<td>order_id</td>
+<td>BIGINT</td>
+<td>FK → orders(id)</td>
+<td>Mã đơn hàng</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>INT</td>
+<td>NOT NULL</td>
+<td>Số lượng</td>
+</tr>
+</tbody>
+</table>
+<h4>Bảng <code>inventory</code></h4>
+<table>
+<thead>
+<tr>
+<th>Cột</th>
+<th>Kiểu</th>
+<th>Ràng buộc</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>Mã nguyên liệu</td>
+</tr>
+<tr>
+<td>name</td>
+<td>VARCHAR(100)</td>
+<td>NOT NULL</td>
+<td>Tên</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>INT</td>
+<td>NOT NULL</td>
+<td>Số lượng</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>VARCHAR(20)</td>
+<td>NOT NULL</td>
+<td>Đơn vị (kg, L)</td>
+</tr>
+</tbody>
+</table>
+<h4>Bảng <code>inventory_history</code></h4>
+<table>
+<thead>
+<tr>
+<th>Cột</th>
+<th>Kiểu</th>
+<th>Ràng buộc</th>
+<th>Mô tả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>BIGINT</td>
+<td>PK, AUTO_INCREMENT</td>
+<td>Mã lịch sử</td>
+</tr>
+<tr>
+<td>inventory_id</td>
+<td>BIGINT</td>
+<td>FK → inventory(id)</td>
+<td>Mã nguyên liệu</td>
+</tr>
+<tr>
+<td>amount_changed</td>
+<td>INT</td>
+<td>NOT NULL</td>
+<td>Số lượng thay đổi</td>
+</tr>
+<tr>
+<td>changed_at</td>
+<td>DATETIME</td>
+<td>NOT NULL</td>
+<td>Thời gian</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>VARCHAR(200)</td>
+<td>NOT NULL</td>
+<td>IMPORT / EXPORT / UNDO</td>
+</tr>
+</tbody>
+</table>
+<h3>3.3. Biểu đồ ERD</h3>
+<p>```mermaid
+erDiagram
+    USERS {
+        bigint id PK
+        varchar username UK
+        varchar password
+        varchar role
+    }</p>
+<pre><code>DRINKS {
+    bigint id PK
+    varchar name
+    int price
+    varchar description
+    varchar type
+}
+
+ORDERS {
+    bigint id PK
+    varchar customer_name
+    datetime created_at
+    varchar status
+}
+
+ORDER_ITEMS {
+    bigint id PK
+    bigint drink_id FK
+    bigint order_id FK
+    int quantity
+}
+
+INVENTORY {
+    bigint id PK
+    varchar name
+    int quantity
+    varchar unit
+}
+
+INVENTORY_HISTORY {
+    bigint id PK
+    bigint inventory_id FK
+    int amount_changed
+    datetime changed_at
+    varchar reason
+}
+
+ORDERS ||--o{ ORDER_ITEMS : "has"
+DRINKS ||--o{ ORDER_ITEMS : "in"
+INVENTORY ||--o{ INVENTORY_HISTORY : "logs"
+</code></pre>
+<p>```</p>
+<hr />
+<h2>4. Biểu đồ lớp &amp; Design Pattern</h2>
+<h3>4.1. Tổng quan Design Pattern</h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Áp dụng</th>
+<th>Mục đích</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Singleton</strong></td>
+<td>OrderQueue, InventoryManagerSingleton, PrinterManager</td>
+<td>1 instance quản lý hàng đợi, kho, máy in</td>
+</tr>
+<tr>
+<td><strong>Factory</strong></td>
+<td>BeverageFactory → Coffee, MilkTea, Smoothie</td>
+<td>Tạo đồ uống theo loại</td>
+</tr>
+<tr>
+<td><strong>Decorator</strong></td>
+<td>IBeverage → BaseBeverage → ToppingDecorator</td>
+<td>Thêm topping linh hoạt</td>
+</tr>
+<tr>
+<td><strong>Decorator</strong></td>
+<td>IOrder → StandardOrder → PriorityDecorator</td>
+<td>VIP ưu tiên</td>
+</tr>
+<tr>
+<td><strong>Command</strong></td>
+<td>ICommand → PlaceOrder, CancelOrder, Import, Export</td>
+<td>Đóng gói thao tác, hỗ trợ Undo</td>
+</tr>
+<tr>
+<td><strong>Composite</strong></td>
+<td>MenuComponent → MenuCategory + MenuItem</td>
+<td>Thực đơn dạng cây</td>
+</tr>
+<tr>
+<td><strong>Composite</strong></td>
+<td>InventoryComponent → InventoryContainer + InventoryItem</td>
+<td>Kho dạng cây</td>
+</tr>
+<tr>
+<td><strong>Adapter</strong></td>
+<td>PaymentGateway → MomoAdapter, VNPayAdapter, BankCardAdapter</td>
+<td>Thanh toán đa cổng</td>
+</tr>
+<tr>
+<td><strong>Prototype</strong></td>
+<td>ComboPrototype → Combo (deep clone)</td>
+<td>Nhân bản Combo</td>
+</tr>
+<tr>
+<td><strong>Prototype</strong></td>
+<td>ReceiptPrototype → EReceipt (deep clone)</td>
+<td>Nhân bản biên lai</td>
+</tr>
+</tbody>
+</table>
+<h3>4.2. Biểu đồ lớp</h3>
+<p>```mermaid
+classDiagram
+    class IBeverage {
+        &lt;<interface>&gt;
+        +getDescription() String
+        +getCost() int
+    }
+    class BaseBeverage {
+        -name: String
+        -price: int
+        +getDescription() String
+        +getCost() int
+    }
+    class ToppingDecorator {
+        &lt;<abstract>&gt;
+        -beverage: IBeverage
+        +getDescription() String
+        +getCost() int
+    }
+    class BobaToppingDecorator
+    class JellyToppingDecorator
+    class WhipCreamDecorator</p>
+<pre><code>IBeverage &lt;|.. BaseBeverage
+IBeverage &lt;|.. ToppingDecorator
+ToppingDecorator &lt;|-- BobaToppingDecorator
+ToppingDecorator &lt;|-- JellyToppingDecorator
+ToppingDecorator &lt;|-- WhipCreamDecorator
+ToppingDecorator o-- IBeverage
+
+class BeverageFactory {
+    +createBeverage(type) Beverage
+}
+class Beverage {
+    &lt;&lt;abstract&gt;&gt;
+    -name: String
+    -price: int
+}
+class Coffee
+class MilkTea
+class Smoothie
+
+Beverage &lt;|-- Coffee
+Beverage &lt;|-- MilkTea
+Beverage &lt;|-- Smoothie
+BeverageFactory ..&gt; Beverage
+
+class ICommand {
+    &lt;&lt;interface&gt;&gt;
+    +execute() void
+    +undo() void
+}
+class PlaceOrderCommand
+class CancelOrderCommand
+class ImportCommand
+class ExportCommand
+
+ICommand &lt;|.. PlaceOrderCommand
+ICommand &lt;|.. CancelOrderCommand
+ICommand &lt;|.. ImportCommand
+ICommand &lt;|.. ExportCommand
+
+class OrderQueue {
+    -instance: OrderQueue
+    +getInstance() OrderQueue
+    +push(order) void
+}
+
+class PaymentGateway {
+    &lt;&lt;interface&gt;&gt;
+    +processPayment(amount) PaymentResult
+}
+class MomoAdapter
+class VNPayAdapter
+class BankCardAdapter
+
+PaymentGateway &lt;|.. MomoAdapter
+PaymentGateway &lt;|.. VNPayAdapter
+PaymentGateway &lt;|.. BankCardAdapter
+
+class MenuComponent {
+    &lt;&lt;interface&gt;&gt;
+    +display() void
+    +getPrice() int
+}
+class MenuCategory {
+    -children: List
+    +add(c) void
+    +remove(c) void
+}
+class MenuItem {
+    -name: String
+    -price: int
+}
+
+MenuComponent &lt;|.. MenuCategory
+MenuComponent &lt;|.. MenuItem
+MenuCategory o-- MenuComponent
+
+class ComboPrototype {
+    &lt;&lt;interface&gt;&gt;
+    +clone() ComboPrototype
+}
+class Combo {
+    -name: String
+    -items: List
+    -discountPercent: int
+    +clone() ComboPrototype
+}
+
+ComboPrototype &lt;|.. Combo
+</code></pre>
+<p>```</p>
+<hr />
+<h1>IV. KIỂM THỬ</h1>
+<h2>1. Mục tiêu</h2>
+<ul>
+<li>Đảm bảo 15 Use Case hoạt động đúng đặc tả</li>
+<li>Kiểm tra luồng chính và luồng ngoại lệ</li>
+<li>Xác minh Design Pattern áp dụng đúng cách</li>
+</ul>
+<h2>2. Phương pháp</h2>
+<ul>
+<li><strong>Black-box Testing:</strong> Kiểm tra input/output</li>
+<li><strong>Functional Testing:</strong> Kiểm tra từng Use Case</li>
+</ul>
+<h2>3. Công cụ</h2>
+<ul>
+<li>Kiểm thử thủ công trên trình duyệt (Chrome, Firefox)</li>
+<li>Postman (kiểm thử API nếu có)</li>
+</ul>
+<h2>4. Kịch bản kiểm thử</h2>
+<h3>TC-01: Đăng nhập thành công</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-01</td>
+</tr>
+<tr>
+<td><strong>UC</strong></td>
+<td>UC01: Đăng nhập</td>
+</tr>
+<tr>
+<td><strong>Mô tả</strong></td>
+<td>Đăng nhập thành công với thông tin hợp lệ</td>
+</tr>
+<tr>
+<td><strong>Tiên quyết</strong></td>
+<td>Tài khoản admin/admin123 tồn tại, role ADMIN</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Truy cập trang đăng nhập. 2. Nhập "admin" / "admin123". 3. Nhấn Đăng nhập.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>Chuyển đến Dashboard. Menu đầy đủ quyền ADMIN.</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-02: Đăng nhập thất bại - Sai mật khẩu</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-02</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Nhập "admin" / "sai_pass". 2. Nhấn Đăng nhập.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>Hiển thị "Sai tên đăng nhập hoặc mật khẩu". Giữ nguyên trang.</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-03: Đăng nhập thất bại - Để trống</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-03</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Để trống username. 2. Nhấn Đăng nhập.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>"Vui lòng nhập đầy đủ thông tin".</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-04: Thêm tài khoản thành công</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-04</td>
+</tr>
+<tr>
+<td><strong>UC</strong></td>
+<td>UC04</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Đăng nhập Admin. 2. Nhấn Thêm. 3. Nhập "cashier01" / "pass123" / CASHIER. 4. Nhấn Lưu.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>Tài khoản mới trong danh sách. Thông báo thành công.</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-05: Thêm tài khoản - Username trùng</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-05</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Nhập username "admin" (đã tồn tại). 2. Nhấn Lưu.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>"Tên đăng nhập đã tồn tại". Không tạo.</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-06: Thêm món (Factory Pattern)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-06</td>
+</tr>
+<tr>
+<td><strong>UC</strong></td>
+<td>UC07</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Chọn "Đồ uống nóng". 2. Thêm "Latte Caramel", 39000, COFFEE. 3. Lưu.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>"Latte Caramel" xuất hiện trong "Đồ uống nóng", giá 39.000₫.</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-07: Xóa món</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-07</td>
+</tr>
+<tr>
+<td><strong>UC</strong></td>
+<td>UC08</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Chọn "Bánh Tiramisu". 2. Nhấn Xóa. 3. Xác nhận.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>"Bánh Tiramisu" biến mất khỏi "Bánh ngọt".</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-08: Đặt Combo (Prototype)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-08</td>
+</tr>
+<tr>
+<td><strong>UC</strong></td>
+<td>UC09</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Chọn "Combo Bữa Sáng" (giảm 10%). 2. Nhập khách "Nguyễn Văn A". 3. Đặt.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>Giá gốc = 54000. Giá giảm = 48600₫. Template gốc không đổi.</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-09: Tạo đơn POS với topping (Decorator)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-09</td>
+</tr>
+<tr>
+<td><strong>UC</strong></td>
+<td>UC10</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Khách "Trần B". 2. Chọn "Trà sữa Oolong" (35000). 3. Topping: Trân châu (+5000), Kem tươi (+7000). 4. SL: 2. 5. Đặt hàng.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>Mô tả: "Trà sữa Oolong + Trân châu + Kem tươi". Đơn giá = 47000. Tổng = 94000₫. Status = PENDING.</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-10: Đánh dấu VIP (Priority Decorator)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-10</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Tạo đơn. 2. Đánh dấu VIP. 3. Đặt hàng.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>isPriority = true. Tên có "⚡ [VIP ƯU TIÊN]". Hiển thị nổi bật.</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-11: Thanh toán MoMo (Adapter)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-11</td>
+</tr>
+<tr>
+<td><strong>UC</strong></td>
+<td>UC12</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Chọn đơn chưa TT. 2. Chọn MoMo. 3. Thanh toán.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>transactionId = "MOMO_TXN_xxx". Đơn → DONE. Log được lưu.</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-12: Thanh toán VNPay (Adapter)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-12</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Chọn đơn. 2. VNPay. 3. Thanh toán.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>transactionId = "VNPAY_QR_xxx". Đơn → DONE.</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-13: In biên lai (Prototype)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-13</td>
+</tr>
+<tr>
+<td><strong>UC</strong></td>
+<td>UC13</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Thanh toán xong. 2. Nhấn In biên lai.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>Biên lai hiển thị: Header "☕ COFFEE CORNER &amp; BISTRO ☕", địa chỉ, SĐT, mã biên lai, tên khách, chi tiết món, tổng tiền, mã giao dịch, footer. Template gốc không đổi.</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-14: Nhập kho + Undo (Command)</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-14</td>
+</tr>
+<tr>
+<td><strong>UC</strong></td>
+<td>UC14</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Chọn "Arabica" (20kg). 2. Nhập kho 10. 3. Kiểm tra = 30. 4. Nhấn Hoàn tác.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>Sau nhập: 30kg. Sau Undo: 20kg. Lịch sử ghi nhận cả nhập + undo.</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-15: Xuất kho vượt tồn</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-15</td>
+</tr>
+<tr>
+<td><strong>Bước</strong></td>
+<td>1. Chọn "Trà Oolong" (10kg). 2. Xuất 50.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>quantity = 0 (không âm).</td>
+</tr>
+</tbody>
+</table>
+<h3>TC-16: Xem Dashboard</h3>
+<table>
+<thead>
+<tr>
+<th>Thuộc tính</th>
+<th>Chi tiết</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ID</strong></td>
+<td>TC-16</td>
+</tr>
+<tr>
+<td><strong>UC</strong></td>
+<td>UC15</td>
+</tr>
+<tr>
+<td><strong>Tiên quyết</strong></td>
+<td>3 đơn (2 DONE tổng 127000₫, 1 CANCELLED). 2 nguyên liệu &lt; 20.</td>
+</tr>
+<tr>
+<td><strong>Kết quả mong đợi</strong></td>
+<td>Doanh thu: 127.000₫. Tổng đơn: 3. Cảnh báo: 2 mặt hàng. Biểu đồ + bảng đơn đúng.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>V. ĐÓNG GÓI VÀ TRIỂN KHAI</h1>
+<h2>1. Công nghệ</h2>
+<table>
+<thead>
+<tr>
+<th>Thành phần</th>
+<th>Công nghệ</th>
+<th>Phiên bản</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend</td>
+<td>Java + Spring Boot</td>
+<td>Java 17, Spring Boot 2.x</td>
+</tr>
+<tr>
+<td>Frontend</td>
+<td>React + Vite</td>
+<td>React 19, Vite 6.x</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>MySQL / H2</td>
+<td>8.x / 2.x</td>
+</tr>
+<tr>
+<td>Build BE</td>
+<td>Apache Maven</td>
+<td>3.x</td>
+</tr>
+<tr>
+<td>Build FE</td>
+<td>npm</td>
+<td>10.x</td>
+</tr>
+</tbody>
+</table>
+<h2>2. Cấu trúc dự án</h2>
+<p><code>Cafe_shop/
+├── backend/
+│   ├── pom.xml
+│   └── src/main/java/com/coffeeshop/
+│       ├── entity/          # User, Drink, Order, OrderItem, Inventory, InventoryHistory
+│       ├── repository/      # JPA Repositories
+│       ├── dto/             # OrderDTO, OrderItemDTO, UserDTO
+│       └── pattern/
+│           ├── singleton/   # OrderQueue, InventoryManagerSingleton, PrinterManager
+│           ├── factory/     # BeverageFactory, Coffee, MilkTea, Smoothie, BillFactory
+│           ├── decorator/   # IBeverage, BaseBeverage, ToppingDecorator, PriorityDecorator
+│           ├── command/     # ICommand, PlaceOrderCommand, CancelOrderCommand, ImportCommand, ExportCommand
+│           ├── composite/   # MenuComponent, MenuCategory, MenuItem, InventoryComponent
+│           ├── adapter/     # PaymentGateway, MomoAdapter, VNPayAdapter, BankCardAdapter
+│           └── prototype/   # ComboPrototype, Combo, ReceiptPrototype, EReceipt
+├── frontend/
+│   ├── package.json
+│   ├── vite.config.js
+│   └── src/
+│       ├── App.jsx
+│       ├── api/mockData.js
+│       ├── components/layout/
+│       └── pages/
+│           ├── Dashboard.jsx
+│           ├── MenuPage.jsx
+│           ├── OrderPage.jsx
+│           ├── InventoryPage.jsx
+│           └── PaymentPage.jsx</code></p>
+<h2>3. Hướng dẫn chạy</h2>
+<p><strong>Backend:</strong>
+<code>bash
+cd backend
+mvn spring-boot:run</code></p>
+<p><strong>Frontend:</strong>
+<code>bash
+cd frontend
+npm install
+npm run dev</code></p>
+<p>Truy cập: <code>http://localhost:5173</code></p>
+<hr />
+<h1>KẾT LUẬN</h1>
+<p>Nhóm đã hoàn thành:</p>
+<ol>
+<li><strong>Phân tích yêu cầu:</strong> 11 STRQ từ stakeholder → 15 Use Case chi tiết.</li>
+<li><strong>Thiết kế hệ thống:</strong> Biểu đồ hoạt động, tuần tự, CSDL 6 bảng, biểu đồ lớp.</li>
+<li><strong>7 Design Pattern:</strong></li>
+<li><strong>Singleton:</strong> Hàng đợi đơn hàng, kho, máy in.</li>
+<li><strong>Factory:</strong> Tạo đồ uống theo loại.</li>
+<li><strong>Decorator:</strong> Topping linh hoạt, VIP ưu tiên.</li>
+<li><strong>Command:</strong> Đặt hàng, nhập/xuất kho với Undo.</li>
+<li><strong>Composite:</strong> Thực đơn + kho dạng cây.</li>
+<li><strong>Adapter:</strong> Đa cổng thanh toán.</li>
+<li><strong>Prototype:</strong> Nhân bản Combo + biên lai.</li>
+<li><strong>Kiểm thử:</strong> 16 kịch bản bao phủ toàn bộ 15 UC.</li>
+<li><strong>Triển khai:</strong> Backend Spring Boot + Frontend React Vite.</li>
+</ol>
+<hr />
+<h1>LỜI CẢM ƠN</h1>
+<p>Nhóm xin gửi lời cảm ơn chân thành đến thầy/cô đã hướng dẫn trong quá trình thực hiện bài tập lớn. Những góp ý và chỉ dẫn đã giúp nhóm định hướng đúng đắn và hoàn thiện nội dung đề tài.</p>
+<p>Do thời gian và kinh nghiệm còn hạn chế, bài làm khó tránh khỏi thiếu sót. Nhóm rất mong nhận được sự góp ý từ thầy/cô.</p>
+<p>Nhóm chúng em xin trân trọng cảm ơn!</p>
+</body>
+</html>
